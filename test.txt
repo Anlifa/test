@@ -3,3 +3,4 @@ git commit -m "hello"
 git add .
 git push
 git status
+git pull
