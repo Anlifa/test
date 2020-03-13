@@ -1,0 +1,5 @@
+git clone https://github.com/Anlifa/test.git
+git commit -m "hello"
+git add .
+git push
+git status
