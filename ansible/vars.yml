@@ -1,0 +1,64 @@
+---
+packages:
+    - apache2
+    - libapache2-mod-php
+    - mysql-server
+    - mysql-client
+    - php
+    - php-mbstring
+    - php-gd
+    - php-xml-util
+    - php-pear
+    - php-cgi
+    - php-common
+    - php-bcmath
+    - php-gettext
+    - php-net-socket
+    - php-mysql
+
+packagespip:
+    - python-pip
+    - python-dev
+    - libmysqlclient-dev
+
+packagesmysqlpython:
+    - MySQL-python
+
+dbname:
+    - DBName=zabbix
+
+dbuser:
+    - DBUser=user
+
+dbpass:
+    - DBPassword=h0mew0rk
+
+packagesdpkg: 
+    - dpkg
+
+zabbixpackageurl: "http://repo.zabbix.com/zabbix/3.4/ubuntu/pool/main/z/zabbix-release/zabbix-release_3.4-1+bionic_all.deb"
+
+zabbixpackagedir: "/home/user/zabbix"
+
+zabbixpackagedpkg: "zabbix-release_3.4-1+bionic_all.deb"
+
+zabbix_dpkg:
+    - zabbix-server-mysql
+    - zabbix-frontend-php
+
+dbhost: 
+    - DBHost=localhost
+
+zabbixcfg: /etc/zabbix/zabbix_server.conf
+
+zbdbname: "DBName=zabbix"
+
+zbdbuser: "DBUser=aleksandr"
+
+zbdbpassword: "DBPassword=h0mew0rk"
+
+zbdbhost: "DBHost=localhost"
+
+apachecfgpath: /usr/share/doc/zabbix-frontend-php/examples/apache.conf
+
+zabbixcfgpath: /etc/apache2/conf-available/zabbix.conf
