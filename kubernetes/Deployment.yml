@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tokio
+  namespace: homework
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: annaliisa/myrepository:nginx
+          imagePullPolicy: Always
+          ports:
+            - name: port
+              containerPort: 80
+              protocol: TCP
+      imagePullSecrets:
+        - name: rio
