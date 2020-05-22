@@ -53,7 +53,7 @@ zabbixcfg: /etc/zabbix/zabbix_server.conf
 
 zbdbname: "DBName=zabbix"
 
-zbdbuser: "DBUser=aleksandr"
+zbdbuser: "DBUser=user"
 
 zbdbpassword: "DBPassword=h0mew0rk"
 
