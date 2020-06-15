@@ -1,12 +1,12 @@
 provider "google" {
-    credentials = "${file("${var.credentials}")}"
-    project = "${var.project}"
-    region = "${var.region}"
-    zone = "${var.zone}"
+    credentials = "${file("clever-basis-278610-8eb529def4d5.json")}"
+    project = "clever-basis-278610"
+    region = "europe-north1"
+    zone = "europe-north1-a"
 }
 
 resource "google_compute_instance" "vm_instance" {
-    name = "terraform-instance"
+    name = "terraform"
     machine_type = "n1-standard-1"
 
     boot_disk {
