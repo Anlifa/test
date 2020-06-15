@@ -1,84 +1,23 @@
----
-    - name: Install apache+php modules
-      apt:
-          name: "{{ item }}"
-          update_cache: yes
-          state: latest
-      with_items: "{{ packages }}"
+provider "google" {
+    credentials = "${file("clever-basis-278610-8eb529def4d5.json")}"
+    project = "clever-basis-278610"
+    region = "europe-north1"
+    zone = "europe-north1-a"
+}
 
-    - name: Install pip modules
-      apt:
-          name: "{{ item }}"
-          update_cache: yes
-          state: latest
-      with_items: "{{ packagespip }}"
+resource "google_compute_instance" "vm_instance" {
+    name = "terraform"
+    machine_type = "n1-standard-1"
 
-    - name: Start apache2 service
-      service:
-          name: apache2
-          state: started
-          enabled: yes
+    boot_disk {
+        initialize_params {
+            image = "debian-cloud/debian-9"
+        }
+    }
 
-    - name: Start mysql service
-      service:
-          name: mysql
-          state: started
-          enabled: yes
-
-    - name: Install MySQL python
-      pip:
-          name: "{{ item }}"
-          state: latest
-      with_items: "{{ packagesmysqlpython }}"
-
-    - name: Create database for Zabbix
-      mysql_db:
-          name: "{{ dbname }}"
-          state: present
-
-    - name: Create database user for zabbix
-      mysql_user:
-        name: "{{ dbuser }}"
-        password: "{{ dbpass }}"
-        priv: "*.*:ALL"
-        state: present
-
-    - name: Install dpkg module
-      apt:
-        name: "{{ item }}"
-        update_cache: yes
-        state: latest
-      with_items: "{{ packagesdpkg }}"
-
-    - name: Install zabbix packages
-      get_url:
-          url: "{{ zabbixpackageurl }}"
-          dest: "{{ zabbixpackagedir }}"
-          mode: "0777"
-
-    - name: Dpkg installed zabbix package
-      dpkg_selections:
-        name: "{{ zabbixpackagedpkg }}"
-        selection: hold
-
-    - name: Install zabbix
-      apt:
-          name: "{{ item }}"
-          update_cache: yes
-          state: latest
-      with_items: "{{ zabbix_dpkg}}"
-
-    - name: Zabbix cfg add-content
-      lineinfile:
-        path: '{{ zabbixcfg }}'
-        line: '{{ zbdbname }}\n{{ zbdbuser }}\n{{ zbdbpassword }}\n{{ zbdbhost }}'
-
-    - name: Restart apache2 service
-      service:
-        name: apache2
-        state: restarted
-
-    - name: CP apachecfg to zabbixcfg
-      copy:
-        src: '{{ apachecfgpath }}'
-        dest: '{{ zabbixcfgpath }}'
+    network_interface {
+    network = "default"
+    access_config {
+    }
+  }
+}
