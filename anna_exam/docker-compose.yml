@@ -1,0 +1,16 @@
+web:
+ image: nginx:latest
+ ports:
+ - "80:80"
+
+ volumes:
+        - ./tpt_exam/exam_php:/code
+        - ./tpt_exam/exam_php/nginx.conf:/etc/nginx/conf.d/myapp.com.conf
+
+ links:
+        - php
+php:
+ image: php:7-fpm
+ volumes:
+        - ./tpt_exam/exam_php:/code
+
